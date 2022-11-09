@@ -19,12 +19,44 @@ export class HomeComponent implements OnInit {
   series;
 
   // player: videojs.Player;
+  activeIndex = 0;
+  currentVideo = this.seriesData.data[this.activeIndex];
+  data: any;
 
   constructor() {
+    console.log("RUNNIN SHIT3")
     this.series = this.seriesData
     console.log("SERIES LIST", this.series.data)
 
   }
+
+  videoPlayerInit(data: any) {
+    console.log("WHAT DATA::",data)
+    this.data = data;
+
+    this.data.getDefaultMedia().subscriptions.loadedMetadata.subscribe(this.initVdo.bind(this));
+    this.data.getDefaultMedia().subscriptions.ended.subscribe(this.nextVideo.bind(this));
+  }
+
+  nextVideo() {
+    this.activeIndex++;
+
+    if (this.activeIndex === this.series.data.length) {
+      this.activeIndex = 0;
+    }
+
+    this.currentVideo = this.series.data[this.activeIndex];
+  }
+
+  initVdo() {
+    this.data.play();
+  }
+
+  startPlaylistVdo(item: any, index: number) {
+    this.activeIndex = index;
+    this.currentVideo = item;
+  }
+
 
   // ngAfterViewInit() {
   //   this.player = videojs(this.targett.nativeElement);
@@ -209,7 +241,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log("RUNNIN SHIT")
 
+    this.series = this.seriesData
+    console.log("SERIES LIST", this.series.data)
 
   }
 

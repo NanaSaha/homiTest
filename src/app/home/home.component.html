@@ -1,20 +1,21 @@
-<div *ngFor="let item of series.data">
 
 
-    <header class="page-header single">
+
+    <!--  <header class="page-header single">
         <div class="poster-bg" data-background="http://digiflex.themezinho.net/wp-content/uploads/2020/12/movies34.jpg">
         </div>
         <div class="container">
+           
             <div class="row">
                 <div class="col-12">
                     <div class="video-player">
-                <vg-player>
-                    <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+          <vg-player>
+                    <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" controls>
                         <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
                     </video>
-                </vg-player>
+                </vg-player> -->
 
-                        <!-- <video #targett class="video-js vjs-big-play-centered" controls preload="auto" width="640" height="264" poster="{{item.banner}}"
+    <!-- <video #targett class="video-js vjs-big-play-centered" controls preload="auto" width="640" height="264" poster="{{item.banner}}"
                             data-setup="{}">
                             <source src="{{item.trailer}}" type="video/mp4" />
                          
@@ -24,19 +25,57 @@
                                 <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
                             </p>
                         </video>
-                        <div class="vjs-playlist"></div> -->
+                        <div class="vjs-playlist"></div> 
 
                     </div>
-                    <!-- end col-12 -->
+                  
                 </div>
-                <!-- end row -->
+              
             </div>
-            <!-- end container -->
+         
         </div>
-    </header>
-    <main>
+    </header>-->
+    <main *ngFor="let item of series.data">
         <section class="content-section">
             <div class="container">
+                <div class="video-player-wrapper">
+
+                    <vg-player (onPlayerReady)="videoPlayerInit($event)">
+                        <vg-overlay-play></vg-overlay-play>
+                        <vg-buffering></vg-buffering>
+
+                        <vg-scrub-bar>
+                            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                        </vg-scrub-bar>
+
+                        <vg-controls>
+                            <vg-play-pause></vg-play-pause>
+                            <vg-playback-button></vg-playback-button>
+
+                            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                            <vg-mute></vg-mute>
+                            <vg-volume></vg-volume>
+
+                            <vg-fullscreen></vg-fullscreen>
+                        </vg-controls>
+                        <!-- vgMedia is underlined in the next line -->
+                        <video #media [vgMedia]="$any(media)" src="{{item.trailer}}" width='150' height='100'
+                            id="singleVideo" preload="auto">
+                        </video>
+                    </vg-player>
+
+                    <!-- <ul class="player-list">
+                                    <li *ngFor="let series of item.seasons.S1; let $index = index" (click)="startPlaylistVdo(series, $index)"
+                                        [class.selected]="series === currentVideo">
+                                        {{ series.title }}
+                                    </li>
+                                </ul> -->
+
+                </div>
 
                 <div class="row">
                     <div class="col-lg-9">
@@ -92,273 +131,74 @@
                         <!-- end movie-side-box -->
                     </div>
                     <!-- end col-3 -->
-                    <div class="col-12">
-                        <div class="info-bottom">
-                            <div class="add-btn">
-                                <div class="simplefavorite-button" data-postid="144" data-siteid="1" data-groupid="1"
-                                    data-favoritecount="118" style="">
-                                    + ADD YOUR LIST
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title light">
+
+                                    <h2 style="color: black">Episodes</h2>
                                 </div>
+                                <!-- end section-title -->
+                            </div>
+                            <!-- end col-12 -->
+                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6"
+                                *ngFor="let series of item.seasons.S1;let $index = index"
+                                (click)="startPlaylistVdo(series, $index)" [class.selected]="series === currentVideo">
+                                <div class="video-thumb light">
+                                    <span class="video-image">
+                                        <img src="{{series.banner}}" alt="Future Hell"
+                                            (click)="startPlaylistVdo(series, $index)" />
+                                        <div class="circle-rate">
+                                            <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40"
+                                                fill="transparent" xmlns="http://www.w3.org/2000/svg">
+                                                <circle class="circle-chart__background" stroke="#eee" stroke-width="2"
+                                                    fill="none" cx="15" cy="15" r="14"></circle>
+                                                <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2"
+                                                    stroke-dasharray="48,100" cx="15" cy="15" r="14"></circle>
+                                            </svg>
+
+                                        </div>
+                                        <!-- end circle-rate -->
+                                        <div class="hd" style="color: black">4K <b>Ultra HD</b></div>
+
+                                    </span>
+                                    <div class="video-content">
+
+
+                                        <h3 class="name">
+                                            <span (click)="startPlaylistVdo(series, $index)" style="color: black">
+                                                {{series.title}}
+                                            </span>
+                                        </h3>
+                                    </div>
+
+                                </div>
+
                             </div>
 
+
                         </div>
+
                     </div>
-                    <!-- end col-12 -->
                 </div>
-                <!-- end row -->
+
             </div>
-            <!-- end container -->
+
         </section>
-        <!-- end content-section -->
-        <section class="content-section" style="background: #111111">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-title light">
-                            <h6>FIND ANYWHERE ELSE</h6>
-                            <h2>Episodes</h2>
-                        </div>
-                        <!-- end section-title -->
-                    </div>
-                    <!-- end col-12 -->
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" *ngFor="let series of item.seasons.S1">
-                        <div class="video-thumb light">
-                            <a href="" class="video-image">
-                                <img src="{{series.banner}}" alt="Future Hell" />
-                                <div class="circle-rate">
-                                    <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40"
-                                        fill="transparent" xmlns="http://www.w3.org/2000/svg">
-                                        <circle class="circle-chart__background" stroke="#eee" stroke-width="2"
-                                            fill="none" cx="15" cy="15" r="14"></circle>
-                                        <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2"
-                                            stroke-dasharray="48,100" cx="15" cy="15" r="14"></circle>
-                                    </svg>
-
-                                </div>
-                                <!-- end circle-rate -->
-                                <div class="hd">4K <b>Ultra HD</b></div>
-                                <!-- end hd -->
-                            </a>
-                            <div class="video-content">
-
-                                <!-- <small class="year"> </small>
-                                <ul class="tags">
-                                    <li>Action</li>
-                                    <li>Adventure</li>
-                                    <li>Comedy</li>
-                                    <li>Romance</li>
-                                </ul> -->
-                                <h3 class="name">
-                                    <a href="http://digiflex.themezinho.net/movie/future-hell/" title="Future Hell"
-                                        data-text="Future Hell">
-                                        {{series.title}}
-                                    </a>
-                                </h3>
-                            </div>
-                            <!-- end video-content -->
-                        </div>
-                        <!-- end video-thumb -->
-                    </div>
 
 
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </section>
-        <!-- end content-section -->
     </main>
-</div>
+
 <footer class="footer" style="background-color: #111111">
 
-    <!-- end container -->
+
     <div class="bottom-bar">
         <div class="container">
             <span>© 2022 Homi | Take Home Test</span>
             <span> By Nana Osafo-Bosompem </span>
         </div>
-        <!-- end container -->
+
     </div>
-    <!-- end footer-bottom -->
+
 </footer>
-
-
-<script>
-        var player = videojs('my-video');  
-
-        player.playlist([{
-            name: 'Disney\'s Oceans 1',
-            description: 'Explore the depths of our planet\'s oceans. ' +
-                'Experience the stories that connect their world to ours. ' +
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
-                'sed do eiusmod tempor incididunt ut labore et dolore magna ' +
-                'aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ' +
-                'laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure ' +
-                'dolor in reprehenderit in voluptate velit esse cillum dolore eu ' +
-                'fugiat nulla pariatur. Excepteur sint occaecat cupidatat non ' +
-                'proident, sunt in culpa qui officia deserunt mollit anim id est ' +
-                'laborum.',
-            duration: 45,
-            sources: [
-                { src: 'http://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' },
-                { src: 'http://vjs.zencdn.net/v/oceans.webm', type: 'video/webm' },
-            ],
-
-            // you can use <picture> syntax to display responsive images
-            thumbnail: [
-                {
-                    srcset: 'test/example/oceans.jpg',
-                    type: 'image/jpeg',
-                    media: '(min-width: 400px;)'
-                },
-                {
-                    src: 'test/example/oceans-low.jpg'
-                }
-            ]
-        },
-        {
-            name: 'Disney\'s Oceans 2',
-            description: 'Explore the depths of our planet\'s oceans. ' +
-                'Experience the stories that connect their world to ours. ' +
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
-                'sed do eiusmod tempor incididunt ut labore et dolore magna ' +
-                'aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ' +
-                'laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure ' +
-                'dolor in reprehenderit in voluptate velit esse cillum dolore eu ' +
-                'fugiat nulla pariatur. Excepteur sint occaecat cupidatat non ' +
-                'proident, sunt in culpa qui officia deserunt mollit anim id est ' +
-                'laborum.',
-            duration: 45,
-            sources: [
-                { src: 'http://vjs.zencdn.net/v/oceans.mp4?2', type: 'video/mp4' },
-                { src: 'http://vjs.zencdn.net/v/oceans.webm?2', type: 'video/webm' },
-            ],
-
-            // you can use <picture> syntax to display responsive images
-            thumbnail: [
-                {
-                    srcset: 'test/example/oceans.jpg?2',
-                    type: 'image/jpeg',
-                    media: '(min-width: 400px;)'
-                },
-                {
-                    src: 'test/example/oceans-low.jpg?2'
-                }
-            ]
-        },
-        {
-            name: 'Disney\'s Oceans 3',
-            description: 'Explore the depths of our planet\'s oceans. ' +
-                'Experience the stories that connect their world to ours. ' +
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
-                'sed do eiusmod tempor incididunt ut labore et dolore magna ' +
-                'aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ' +
-                'laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure ' +
-                'dolor in reprehenderit in voluptate velit esse cillum dolore eu ' +
-                'fugiat nulla pariatur. Excepteur sint occaecat cupidatat non ' +
-                'proident, sunt in culpa qui officia deserunt mollit anim id est ' +
-                'laborum.',
-            duration: 45,
-            sources: [
-                { src: 'http://vjs.zencdn.net/v/oceans.mp4?3', type: 'video/mp4' },
-                { src: 'http://vjs.zencdn.net/v/oceans.webm?3', type: 'video/webm' },
-            ],
-
-            // you can use <picture> syntax to display responsive images
-            thumbnail: [
-                {
-                    srcset: 'test/example/oceans.jpg?3',
-                    type: 'image/jpeg',
-                    media: '(min-width: 400px;)'
-                },
-                {
-                    src: 'test/example/oceans-low.jpg?3'
-                }
-            ]
-        },
-        {
-            name: 'Disney\'s Oceans 4',
-            description: 'Abc.',
-            duration: 45,
-            sources: [
-                { src: 'http://vjs.zencdn.net/v/oceans.mp4?4', type: 'video/mp4' },
-                { src: 'http://vjs.zencdn.net/v/oceans.webm?4', type: 'video/webm' },
-            ],
-
-            // you can use <picture> syntax to display responsive images
-            thumbnail: [
-                {
-                    srcset: 'test/example/oceans.jpg?4',
-                    type: 'image/jpeg',
-                    media: '(min-width: 400px;)'
-                },
-                {
-                    src: 'test/example/oceans-low.jpg?4'
-                }
-            ]
-        },
-        {
-            name: 'Disney\'s Oceans 5',
-            description: 'Abc.',
-            duration: 45,
-            sources: [
-                { src: 'http://vjs.zencdn.net/v/oceans.mp4?5', type: 'video/mp4' },
-                { src: 'http://vjs.zencdn.net/v/oceans.webm?5', type: 'video/webm' },
-            ],
-
-            // you can use <picture> syntax to display responsive images
-            thumbnail: [
-                {
-                    srcset: 'test/example/oceans.jpg?5',
-                    type: 'image/jpeg',
-                    media: '(min-width: 400px;)'
-                },
-                {
-                    src: 'test/example/oceans-low.jpg?5'
-                }
-            ]
-        },
-        {
-            name: 'Disney\'s Oceans 6',
-            description: 'Abc.',
-            duration: 45,
-            sources: [
-                { src: 'http://vjs.zencdn.net/v/oceans.mp4?6', type: 'video/mp4' },
-                { src: 'http://vjs.zencdn.net/v/oceans.webm?6', type: 'video/webm' },
-            ],
-
-            // you can use <picture> syntax to display responsive images
-            thumbnail: [
-                {
-                    srcset: 'test/example/oceans.jpg?6',
-                    type: 'image/jpeg',
-                    media: '(min-width: 400px;)'
-                },
-                {
-                    src: 'test/example/oceans-low.jpg?6'
-                }
-            ]
-        }, {
-            name: 'Sintel (No Thumbnail)',
-            description: 'The film follows a girl named Sintel who is searching for a baby dragon she calls Scales.',
-            sources: [
-                { src: 'http://media.w3.org/2010/05/sintel/trailer.mp4', type: 'video/mp4' },
-                { src: 'http://media.w3.org/2010/05/sintel/trailer.webm', type: 'video/webm' },
-                { src: 'http://media.w3.org/2010/05/sintel/trailer.ogv', type: 'video/ogg' }
-            ],
-            thumbnail: false
-        },
-
-        // This is a really underspecified video to demonstrate the
-        // behavior when optional parameters are missing. You'll get better
-        // results with more video metadata!
-        {
-            name: 'Invalid Source',
-            sources: [{
-                src: 'Invalid'
-            }]
-        }]);
-
-        // Initialize the playlist-ui plugin with no option (i.e. the defaults).
-        player.playlistUi();
-</script>
