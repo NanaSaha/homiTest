@@ -1,36 +1,30 @@
-<!-- 
-<vg-player (onPlayerReady)="videoPlayerInit($event)">
-    <vg-buffering></vg-buffering>
-
-    <vg-controls>
-        <vg-play-pause></vg-play-pause>
-        <vg-playback-button></vg-playback-button>
-
-        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-
+  <!-- <div class="video-player-wrapper">
+    <vg-player (onPlayerReady)="videoPlayerInit2($event)">
+        <vg-overlay-play></vg-overlay-play>
+        <vg-buffering></vg-buffering>
         <vg-scrub-bar>
             <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
             <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
         </vg-scrub-bar>
-
-        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-
-        <vg-mute></vg-mute>
-        <vg-volume></vg-volume>
-
-        <vg-fullscreen></vg-fullscreen>
-    </vg-controls>
-
-    <video #media [vgMedia]="$any(media)" src="{{currentVideo.trailer}}" id="singleVideo" preload="auto" crossorigin>
-    </video>
-</vg-player>
-
-<ul>
-    <li *ngFor="let item of series.data; let $index = index" (click)="startPlaylistVdo(item, $index)"
-        [class.selected]="item === currentVideo">
-        {{ item.title }}
-    </li>
-</ul> -->
+        <vg-controls>
+            <vg-play-pause></vg-play-pause>
+            <vg-playback-button></vg-playback-button>
+            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+            <vg-mute></vg-mute>
+            <vg-volume></vg-volume>
+            <vg-fullscreen></vg-fullscreen>
+        </vg-controls>
+        <video #media [vgMedia]="$any(media)" [src]="currentVideo2.src" id="singleVideo" preload="auto" crossorigin>
+        </video>
+    </vg-player>
+    <ul class="player-list">
+        <li *ngFor="let vdo of videoItems; let $index = index" (click)="startPlaylistVdo2(vdo, $index)"
+            [class.selected]="vdo === currentVideo2">
+            {{ vdo.name }}
+        </li>
+    </ul>
+</div>   -->
 
 <style>
     .headd {
@@ -58,6 +52,7 @@
     color: white;">Homi Take-Home Test</h4>
 
 </header> -->
+   
 <main *ngFor="let item of series.data">
     <section class="content-section" >
         <div class="container">
@@ -88,7 +83,7 @@
                         <vg-fullscreen></vg-fullscreen>
                     </vg-controls>
                     <!-- vgMedia is underlined in the next line -->
-                    <video #media [vgMedia]="$any(media)" src="{{item.trailer}}" width='150' height='100'
+                    <video #media [vgMedia]="$any(media)" [src]="currentVideo.trailer"width='150' height='100'
                         id="singleVideo" preload="auto">
                     </video>
                 </vg-player>
