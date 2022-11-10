@@ -2,6 +2,9 @@
 //  import 'videojs-playlist-ui';
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import seriesData from '../series.json'; 
+// import { VgAPI } from 'videogular2/core';
+import { VgApiService } from '@videogular/ngx-videogular/core';
+
 
 
 
@@ -28,13 +31,15 @@ export class HomeComponent implements OnInit {
     this.series = this.seriesData
     console.log("SERIES LIST", this.series.data)
 
+    console.log("Current Video", this.currentVideo)
+
   }
 
   videoPlayerInit(data: any) {
     console.log("WHAT DATA::",data)
     this.data = data;
 
-    this.data.getDefaultMedia().subscriptions.loadedMetadata.subscribe(this.initVdo.bind(this));
+    // this.data.getDefaultMedia().subscriptions.loadedMetadata.subscribe(this.initVdo.bind(this));
     this.data.getDefaultMedia().subscriptions.ended.subscribe(this.nextVideo.bind(this));
   }
 
@@ -53,8 +58,11 @@ export class HomeComponent implements OnInit {
   }
 
   startPlaylistVdo(item: any, index: number) {
+    console.log("Want to play episode")
     this.activeIndex = index;
     this.currentVideo = item;
+
+    this.nextVideo()
   }
 
 

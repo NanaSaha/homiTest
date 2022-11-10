@@ -1,194 +1,268 @@
+<!-- 
+<vg-player (onPlayerReady)="videoPlayerInit($event)">
+    <vg-buffering></vg-buffering>
 
+    <vg-controls>
+        <vg-play-pause></vg-play-pause>
+        <vg-playback-button></vg-playback-button>
 
+        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
 
-    <!--  <header class="page-header single">
-        <div class="poster-bg" data-background="http://digiflex.themezinho.net/wp-content/uploads/2020/12/movies34.jpg">
-        </div>
+        <vg-scrub-bar>
+            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+        </vg-scrub-bar>
+
+        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+        <vg-mute></vg-mute>
+        <vg-volume></vg-volume>
+
+        <vg-fullscreen></vg-fullscreen>
+    </vg-controls>
+
+    <video #media [vgMedia]="$any(media)" src="{{currentVideo.trailer}}" id="singleVideo" preload="auto" crossorigin>
+    </video>
+</vg-player>
+
+<ul>
+    <li *ngFor="let item of series.data; let $index = index" (click)="startPlaylistVdo(item, $index)"
+        [class.selected]="item === currentVideo">
+        {{ item.title }}
+    </li>
+</ul> -->
+
+<style>
+    .headd {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        background-size: cover !important;
+        position: fixed;
+        background-position: center !important;
+        background-image: url('http://digiflex.themezinho.net/wp-content/uploads/2020/12/slide02.jpg');
+        left: 0;
+        top: 0;
+        z-index: 999999999999;
+
+    }
+</style>
+
+<!-- <header class="headd">
+
+    <h4 style="    font-size: 62px;
+    font-weight: 900;
+    text-align: center;
+    color: white;">Homi Take-Home Test</h4>
+
+</header> -->
+<main *ngFor="let item of series.data">
+    <section class="content-section" >
         <div class="container">
-           
-            <div class="row">
-                <div class="col-12">
-                    <div class="video-player">
-          <vg-player>
-                    <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" controls>
-                        <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
+            <h2 class="name">{{item.title}}</h2>
+            <hr>
+            <div class="video-player-wrapper">
+
+                <vg-player (onPlayerReady)="videoPlayerInit($event)">
+                    <vg-overlay-play></vg-overlay-play>
+                    <vg-buffering></vg-buffering>
+
+                    <vg-scrub-bar>
+                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                    </vg-scrub-bar>
+
+                    <vg-controls>
+                        <vg-play-pause></vg-play-pause>
+                        <vg-playback-button></vg-playback-button>
+
+                        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                        <vg-mute></vg-mute>
+                        <vg-volume></vg-volume>
+
+                        <vg-fullscreen></vg-fullscreen>
+                    </vg-controls>
+                    <!-- vgMedia is underlined in the next line -->
+                    <video #media [vgMedia]="$any(media)" src="{{item.trailer}}" width='150' height='100'
+                        id="singleVideo" preload="auto">
                     </video>
-                </vg-player> -->
+                </vg-player>
 
-    <!-- <video #targett class="video-js vjs-big-play-centered" controls preload="auto" width="640" height="264" poster="{{item.banner}}"
-                            data-setup="{}">
-                            <source src="{{item.trailer}}" type="video/mp4" />
-                         
-                            <p class="vjs-no-js">
-                                To view this video please enable JavaScript, and consider upgrading to a
-                                web browser that
-                                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                            </p>
-                        </video>
-                        <div class="vjs-playlist"></div> 
-
-                    </div>
-                  
-                </div>
-              
-            </div>
-         
-        </div>
-    </header>-->
-    <main *ngFor="let item of series.data">
-        <section class="content-section">
-            <div class="container">
-                <div class="video-player-wrapper">
-
-                    <vg-player (onPlayerReady)="videoPlayerInit($event)">
-                        <vg-overlay-play></vg-overlay-play>
-                        <vg-buffering></vg-buffering>
-
-                        <vg-scrub-bar>
-                            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-                        </vg-scrub-bar>
-
-                        <vg-controls>
-                            <vg-play-pause></vg-play-pause>
-                            <vg-playback-button></vg-playback-button>
-
-                            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-
-                            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-
-                            <vg-mute></vg-mute>
-                            <vg-volume></vg-volume>
-
-                            <vg-fullscreen></vg-fullscreen>
-                        </vg-controls>
-                        <!-- vgMedia is underlined in the next line -->
-                        <video #media [vgMedia]="$any(media)" src="{{item.trailer}}" width='150' height='100'
-                            id="singleVideo" preload="auto">
-                        </video>
-                    </vg-player>
-
-                    <!-- <ul class="player-list">
+                <!-- <ul class="player-list">
                                     <li *ngFor="let series of item.seasons.S1; let $index = index" (click)="startPlaylistVdo(series, $index)"
                                         [class.selected]="series === currentVideo">
                                         {{ series.title }}
                                     </li>
                                 </ul> -->
 
-                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-lg-9">
-                        <div class="movie-info-box">
-                            <h2 class="name">{{item.title}}</h2>
-                            <div class="features">
-                                <div class="rate">
-                                    <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40"
-                                        fill="transparent" xmlns="http://www.w3.org/2000/svg">
-                                        <circle class="circle-chart__background" stroke="#eee" stroke-width="2"
-                                            fill="none" cx="15" cy="15" r="14"></circle>
-                                        <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2"
-                                            stroke-dasharray="63,100" cx="15" cy="15" r="14"></circle>
-                                    </svg>
-                                    <b> 7.1 </b>
-                                    <img src="{{item.banner}}" alt="IMDB" />
-                                    Score
-                                </div>
-                                <!-- end rate -->
-                                <div class="year">{{item.released}}</div>
-                                <!-- end year -->
-                                <div class="quality">8K <b>Ultra HD</b></div>
-                                <!-- end quality -->
-                                <div class="range">1 hr 45 min</div>
-                                <!-- end range -->
-                                <div class="cc">CC</div>
-                                <div class="category">{{item.category}}</div>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="movie-info-box">
+                        <h2 class="name">{{item.title}}</h2>
+                        <div class="features">
+                            <div class="rate">
+                                <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40" fill="transparent"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle class="circle-chart__background" stroke="#eee" stroke-width="2" fill="none"
+                                        cx="15" cy="15" r="14"></circle>
+                                    <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2"
+                                        stroke-dasharray="63,100" cx="15" cy="15" r="14"></circle>
+                                </svg>
+                                <b> 7.1 </b>
+                                <img src="{{item.banner}}" alt="IMDB" />
+                                Score
                             </div>
-                            <!-- end features -->
-                            <p class="description">
-                                {{item.synopsis}}
-                            </p>
-                            <ul class="info">
-
-                                <li>
-                                    <h6>Casting</h6>
-                                    :
-                                    <span>{{item.staring}} </span>
-                                </li>
-
-                            </ul>
-                            <!-- end info -->
+                            <!-- end rate -->
+                            <div class="year">{{item.released}}</div>
+                            <!-- end year -->
+                            <div class="quality">8K <b>Ultra HD</b></div>
+                            <!-- end quality -->
+                            <div class="range">1 hr 45 min</div>
+                            <!-- end range -->
+                            <div class="cc">CC</div>
+                            <div class="category">{{item.category}}</div>
                         </div>
-                        <!-- end movie-info-box -->
+                        <!-- end features -->
+                        <p class="description">
+                            {{item.synopsis}}
+                        </p>
+                        <ul class="info">
+
+                            <li>
+                                <h6>Casting</h6>
+                                :
+                                <span>{{item.staring}} </span>
+                            </li>
+
+                        </ul>
+                        <!-- end info -->
                     </div>
-                    <!-- end col-9 -->
-                    <div class="col-lg-3">
-                        <div class="movie-side-box">
+                    <!-- end movie-info-box -->
+                </div>
+                <!-- end col-9 -->
+                <div class="col-lg-3">
+                    <!-- <div class="movie-side-box">
                             <figure>
                                 <img src="{{item.banner}}" alt="{{item.title}}" />
                             </figure>
-                        </div>
-                        <!-- end movie-side-box -->
-                    </div>
-                    <!-- end col-3 -->
+                        </div> -->
+                    <!-- end movie-side-box -->
+                </div>
+                <!-- end col-3 -->
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="section-title light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-title light">
 
-                                    <h2 style="color: black">Episodes</h2>
-                                </div>
-                                <!-- end section-title -->
+                                <h2 style="color: black">Season 1 Episodes</h2>
                             </div>
-                            <!-- end col-12 -->
-                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6"
-                                *ngFor="let series of item.seasons.S1;let $index = index"
-                                (click)="startPlaylistVdo(series, $index)" [class.selected]="series === currentVideo">
-                                <div class="video-thumb light">
-                                    <span class="video-image">
-                                        <img src="{{series.banner}}" alt="Future Hell"
-                                            (click)="startPlaylistVdo(series, $index)" />
-                                        <div class="circle-rate">
-                                            <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40"
-                                                fill="transparent" xmlns="http://www.w3.org/2000/svg">
-                                                <circle class="circle-chart__background" stroke="#eee" stroke-width="2"
-                                                    fill="none" cx="15" cy="15" r="14"></circle>
-                                                <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2"
-                                                    stroke-dasharray="48,100" cx="15" cy="15" r="14"></circle>
-                                            </svg>
+                            <!-- end section-title -->
+                        </div>
+                        <!-- end col-12 -->
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6"
+                            *ngFor="let series of item.seasons.S1;let $index = index"
+                            (click)="startPlaylistVdo(series, $index)" [class.selected]="series === currentVideo">
+                            <div class="video-thumb light">
+                                <span class="video-image">
+                                    <img src="{{series.banner}}" alt="Future Hell"
+                                        (click)="startPlaylistVdo(series, $index)" />
+                                    <div class="circle-rate">
+                                        <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40"
+                                            fill="transparent" xmlns="http://www.w3.org/2000/svg">
+                                            <circle class="circle-chart__background" stroke="#eee" stroke-width="2"
+                                                fill="none" cx="15" cy="15" r="14"></circle>
+                                            <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2"
+                                                stroke-dasharray="48,100" cx="15" cy="15" r="14"></circle>
+                                        </svg>
 
-                                        </div>
-                                        <!-- end circle-rate -->
-                                        <div class="hd" style="color: black">4K <b>Ultra HD</b></div>
-
-                                    </span>
-                                    <div class="video-content">
-
-
-                                        <h3 class="name">
-                                            <span (click)="startPlaylistVdo(series, $index)" style="color: black">
-                                                {{series.title}}
-                                            </span>
-                                        </h3>
                                     </div>
+                                    <!-- end circle-rate -->
+                                    <div class="hd" style="color: black">4K <b>Ultra HD</b></div>
 
+                                </span>
+                                <div class="video-content">
+
+
+                                    <h3 class="name">
+                                        <span (click)="startPlaylistVdo(series, $index)" style="color: black">
+                                            {{series.title}}
+                                        </span>
+                                    </h3>
                                 </div>
 
                             </div>
 
-
                         </div>
 
+
                     </div>
+
                 </div>
 
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-title light">
+                
+                                <h2 style="color: black">Season 2 Episodes</h2>
+                            </div>
+                            <!-- end section-title -->
+                        </div>
+                        <!-- end col-12 -->
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" *ngFor="let series of item.seasons.S2;let $index = index"
+                            (click)="startPlaylistVdo(series, $index)" [class.selected]="series === currentVideo">
+                            <div class="video-thumb light">
+                                <span class="video-image">
+                                    <img src="{{series.banner}}" alt="Future Hell" (click)="startPlaylistVdo(series, $index)" />
+                                    <div class="circle-rate">
+                                        <svg class="circle-chart" viewBox="0 0 30 30" width="40" height="40" fill="transparent"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <circle class="circle-chart__background" stroke="#eee" stroke-width="2" fill="none" cx="15"
+                                                cy="15" r="14"></circle>
+                                            <circle class="circle-chart__circle" stroke="#4eb04b" stroke-width="2"
+                                                stroke-dasharray="48,100" cx="15" cy="15" r="14"></circle>
+                                        </svg>
+                
+                                    </div>
+                                    <!-- end circle-rate -->
+                                    <div class="hd" style="color: black">4K <b>Ultra HD</b></div>
+                
+                                </span>
+                                <div class="video-content">
+                
+                
+                                    <h3 class="name">
+                                        <span (click)="startPlaylistVdo(series, $index)" style="color: black">
+                                            {{series.title}}
+                                        </span>
+                                    </h3>
+                                </div>
+                
+                            </div>
+                
+                        </div>
+                
+                
+                    </div>
+                
+                </div>
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
-    </main>
+</main>
+<hr>
 
 <footer class="footer" style="background-color: #111111">
 
